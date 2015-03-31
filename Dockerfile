@@ -1,8 +1,9 @@
 FROM node:latest
 
-MAINTAINER Corentin Kerisit "c@42.am"
+MAINTAINER bob@grip.qa
 
-RUN echo deb http://ftp.debian.org/debian/ jessie main contrib non-free > /etc/apt/source.list
+ENV PORT 1337
+EXPOSE 1337
 
 RUN apt-get update -y && apt-get install -y \
     python2.7 python-pip \
@@ -15,4 +16,6 @@ RUN cd /data && npm install
 
 ADD . /data/
 
-CMD node /data/server.js
+ENTRYPOINT ["node"]
+
+CMD ["/data/server.js"]
